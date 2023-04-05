@@ -23,8 +23,8 @@ export default function Home() {
         <Hero />
         <Exchange />
         <Chart />
-        <Footer />
       </div>
+        <Footer />
     </>
   );
 }
