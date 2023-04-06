@@ -45,7 +45,7 @@ export default function Exchange() {
         <div className="flex items-center justify-center col-span-3 gap-4 lg:mx-10 mx-1 mt-3">
           <div className="relative flex items-center w-[187px] border-2 border-neutral-200 dark:border-neutral-500  rounded-md">
             <input
-              className="w-full text-sm bg-transparent placeholder-center text-center py-3 px-3  rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+              className="w-full text-sm font-GT_Pressura_Mono_Regular bg-transparent placeholder-center text-center py-3 px-3  rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
               placeholder="You send"
             />
             <div className="absolute right-2 ">
