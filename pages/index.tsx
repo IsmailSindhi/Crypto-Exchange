@@ -22,7 +22,7 @@ export default function Home() {
       <div className="w-full justify-center flex flex-col items-center">
         <Hero />
         <Exchange />
-        <Chart />
+        {/* <Chart /> */}
       </div>
         <Footer />
     </>

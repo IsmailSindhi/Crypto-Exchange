@@ -5,7 +5,36 @@
 
 
 
+
 @layer base {
+  @font-face {
+    font-family: 'Verctex';
+    src: url('/fonts/VectrexWeb-Bold.woff2') format('woff2');
+         /* url('/fonts/MyFont.woff') format('woff'); */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT-Pressura-Mono-Bold';
+    src: url('/fonts/GT-Pressura-Mono-Bold.woff2') format('woff2');
+         /* url('/fonts/MyFont.woff') format('woff'); */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT-Pressura-Mono-Light';
+    src: url('/fonts/GT-Pressura-Mono-Light.woff2') format('woff2');
+         /* url('/fonts/MyFont.woff') format('woff'); */
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GT-Pressura-Mono-Regular';
+    src: url('/fonts/GT-Pressura-Mono-Regular.woff2') format('woff2');
+         /* url('/fonts/MyFont.woff') format('woff'); */
+    font-weight: normal;
+    font-style: normal;
+  }
     h1 {
       @apply text-2xl; /* 24 34WWWWWWWWWWWWW */
     }
@@ -25,9 +54,7 @@
         
         @apply text-xs; /*  12 */
     }
-   body{
-    @apply bg-white dark:bg-[#011627];
-   }
+
    
   }
 /*   
@@ -45,3 +72,5 @@
       filter: grayscale(100%);
     } */
   }
+
+ 

@@ -16,7 +16,7 @@ export default function Topbar() {
 
   return (
     <>
-      <div className="flex justify-center bg-l-fg dark:bg-d-fg border-b border-neutral-100 dark:border-neutral-800 px-4 py-5">
+      <div className="flex justify-center bg-l-fg font-verctex dark:bg-d-fg border-b border-neutral-100 dark:border-neutral-800 px-4 py-5">
         <div className="flex w-full max-w-4xl items-center justify-between gap-1">
           CEXO
         </div>
