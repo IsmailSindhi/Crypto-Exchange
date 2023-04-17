@@ -3,21 +3,30 @@ import { GoSearch } from "react-icons/go";
 import { MdOutlineDone } from "react-icons/md";
 import Image from "next/image";
 import axios from "axios";
+import {useContext} from 'react'
+import { AppContext } from '../contexts/AppContext';
 import { useEffect, useState } from "react";
 // import { getAllCryptocurrencies } from "./apicall";
 export default function Model(data: any) {
-  const modelc: boolean = true;
-  const show: string = modelc ? "flex" : "hidden";
+  const { isSendOpen,setIsSendOpen } = useContext(AppContext);
+  const handleClick = () => {
+    setIsSendOpen(!isSendOpen);
+  };
+  console.log(isSendOpen,'from model');
+  const show: string = isSendOpen ? "flex" : "hidden";
   console.log(data.data)
  
   return (
     <>
       <div
-        className={`${show} flex-col gap-10 p-6 w-full max-w-xl text-black dark:text-white rounded-t-md border-2 border-b-4  rounded-lg pt-3 border-gray-500 hover:border-black dark:hover:border-white`}
+        className={`${show} absolute flex-col gap-10  p-6 w-full max-w-xl text-black dark:text-white rounded-t-md border-2 border-b-4  rounded-lg pt-3 border-gray-500 hover:border-black dark:hover:border-white dark:bg-black z-10`}
       >
         <div className="flex items-center justify-between">
           <h1 className="font-verctex text-2xl">You Send</h1>
+          <button onClick={handleClick}>
+
           <IoMdClose className="w-7 h-7" />
+          </button>
         </div>
         <div className="flex gap-8 px-7 py-10 text-black dark:text-white rounded-t-md border-2 border-b-4  rounded-lg  border-gray-500 hover:border-black dark:hover:border-white">
           <GoSearch className="w-9 h-9" />
@@ -26,7 +35,7 @@ export default function Model(data: any) {
             className=" w-full bg-transparent font-GT_Pressura_Mono text-2xl focus:outline-none"
           />
         </div>
-        <div>
+        <div className="overflow-y-auto max-h-[400px]">
           <h1 className="font-GT_Pressura_Mono text-sm">POPULAR</h1>
           {data.data.map((item: any, index: any)=> (<li className="list-none" key={index}>
             

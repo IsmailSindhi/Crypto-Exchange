@@ -1,8 +1,14 @@
 import Image from "next/image";
+import {useContext} from 'react'
+import { AppContext } from '../contexts/AppContext';
 export default function Send() {
+  const { isSendOpen,setIsSendOpen } = useContext(AppContext);
+  const handleClick = () => {
+    setIsSendOpen(!isSendOpen);
+  };
     return (
       <>
-        <button className="img-btn">
+        <button className="img-btn" onClick={handleClick}>
             <div className="flex flex-col items-center p-5 w-[180px]">
               <Image
               // /images
