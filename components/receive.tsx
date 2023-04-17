@@ -5,7 +5,8 @@ export default function Receive() {
         <button className="img-btn">
             <div className="flex flex-col items-center p-5 w-[180px]">
               <Image
-                src="https://sideshift.ai/assets/btc-5a8131ec.svg"
+                src="/coins/svg/BTC.svg"
+                // src="https://sideshift.ai/assets/btc-5a8131ec.svg"
                 alt="Picture of the author"
                 className="w-[74px] h-[76px]"
                 width={74}

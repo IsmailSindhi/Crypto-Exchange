@@ -5,7 +5,9 @@ export default function Send() {
         <button className="img-btn">
             <div className="flex flex-col items-center p-5 w-[180px]">
               <Image
-                src="https://sideshift.ai/assets/eth-1f94df85.svg"
+              // /images
+                src="/coins/svg/ETH.svg"
+                // src="https://sideshift.ai/assets/eth-1f94df85.svg"
                 alt="Picture of the author"
                 className="w-[74px] h-[76px]"
                 width={74}
