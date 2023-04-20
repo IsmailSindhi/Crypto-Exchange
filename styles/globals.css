@@ -74,10 +74,12 @@
     .c-div {
       @apply relative flex items-center w-[187px] border-2 border-neutral-200 dark:border-neutral-500  rounded-lg;
     }
-    small-btn {
+    .small-btn {
       @apply border-2 border-b-4 border-neutral-400 py-1 px-2 rounded-xl hover:border-black dark:hover:border-white;
     }
-
+    .model-div {
+      @apply absolute flex-col gap-10  p-6 w-full max-w-xl text-black dark:text-white rounded-t-md border-2 border-b-4  rounded-lg pt-3 border-gray-500 hover:border-black dark:hover:border-white bg-white dark:bg-black z-10;
+    }
   }
     /*   
     .btn-blue {

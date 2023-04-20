@@ -5,30 +5,58 @@ type Props = {
     children: ReactNode;
   };
 type AppContextType = {
-//   name: string;
-//   setName: (name: string) => void;
+  send: string;
+  setSend: (send: string) => void;
+  recive: string;
+  setRecive: (send: string) => void;
 //   isLoggedIn: boolean;
 //   setIsLoggedIn: (isLoggedIn: boolean) => void;
   isSendOpen: boolean;
   setIsSendOpen: (isSendOpen: boolean) => void;
+  isReciveOpen: boolean;
+  setIsReciveOpen: (isSendOpen: boolean) => void;
+  sendNetwork: string;
+  setSendNetwork: (send: string) => void;
+  reciveNetwork: string;
+  setReciveNetwork: (send: string) => void;
 };
 
 export const AppContext = createContext<AppContextType>({
-//   name: '',
+  send: 'ETH',
+  setSend: () => {},
+  recive: 'BTC',
+  setRecive: () => {},
+  sendNetwork: 'ETH',
+  setSendNetwork: () => {},
+  reciveNetwork: 'BTC',
+  setReciveNetwork: () => {},
   isSendOpen: false,
-//   setName: () => {},
   setIsSendOpen: () => {},
+  isReciveOpen: false,
+  setIsReciveOpen: () => {},
 });
 
 export const AppContextProvider: React.FC<Props> = ({ children }) => {
-//   const [name, setName] = useState('');
+  const [reciveNetwork, setReciveNetwork] = useState('BTC');
+  const [sendNetwork, setSendNetwork] = useState('ETH');
+  const [recive, setRecive] = useState('BTC');
+  const [send, setSend] = useState('ETH');
   const [isSendOpen, setIsSendOpen] = useState(false);
+  const [isReciveOpen, setIsReciveOpen] = useState(false);
 
   const contextValue: AppContextType = {
-    // name,
+    send,
     isSendOpen,
-    // setName,
+    setSend,
     setIsSendOpen,
+    recive,
+    setRecive,
+    isReciveOpen,
+    setIsReciveOpen,
+    reciveNetwork,
+    setReciveNetwork,
+    sendNetwork,
+    setSendNetwork,
   };
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;

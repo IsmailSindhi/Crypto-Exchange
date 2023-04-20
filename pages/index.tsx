@@ -6,14 +6,15 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Hero from "@/components/hero";
 import Exchange from "@/components/exchange";
-import Model from "@/components/model";
 import Footer from "@/components/footer";
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import { getAllCryptocurrencies } from "../components/apicall";
+import ModelSend from "@/components/modelsend";
+import ModelRecive from "@/components/modelrecive";
 
 export default function Home({ data }: any) {
-  // console.log(data);
+  console.log(data);
   return (
     <>
       <Head>
@@ -26,7 +27,8 @@ export default function Home({ data }: any) {
       <Topbar />
       <div className="w-full justify-center flex flex-col items-center">
         <Hero />
-        <Model data={data}/>
+        <ModelSend data={data}/>
+        <ModelRecive data={data}/>
         <Exchange />
         {/* <Chart /> */}
       </div>
