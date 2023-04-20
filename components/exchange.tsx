@@ -23,7 +23,7 @@ export default function Exchange() {
     <>
       <div className="grid grid-cols-3 max-w-xl w-full text-black dark:text-white py-12 border-[3px] border-gray-200 dark:border-gray-600 rounded-lg px-3 lg:px-0">
         <h6 className="col-span-3 w-full flex justify-center items-center gap-2 text-black dark:text-neutral-300">
-        1 BTC = 0.06558863 ETH 
+        1 {send} = 0.06558863 {recive} 
         </h6>
         <div className="flex col-span-3 lg:px-12 px-1 mt-5 gap-3 items-center justify-center">
           <Send />

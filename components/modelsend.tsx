@@ -61,11 +61,11 @@ export default function ModelSend(data: any) {
           {searchResults.map((item: any, index: any) => (
             <li className="list-none" key={index}>
               <div className="flex flex-col gap-4 items-center justify-between ">
-                {item.networkList.map((network: any) => (
+                {item.networkList.map((network: any, networkIndex: any) => (
                 
                 <button
                   className="w-full flex justify-between dark:hover:bg-[#171D23] px-7 py-2 rounded-lg"
-                  key={index}
+                  key={networkIndex}
                   onClick={() => {
                     handleCurrenciesClick(item.currency, network.name);
                   }}
