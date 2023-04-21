@@ -7,7 +7,7 @@ import {useContext} from 'react'
 import { AppContext } from '../contexts/AppContext';
 import { useEffect, useState } from "react";
 // import { getAllCryptocurrencies } from "./apicall";
-export default function ModelRecive(data: any) {
+export default function ModelRecive() {
   const { isReciveOpen,setIsReciveOpen,setRecive,recive, reciveNetwork, setReciveNetwork } = useContext(AppContext);
   const handleClick = () => {
     setIsReciveOpen(!isReciveOpen);
@@ -22,14 +22,26 @@ export default function ModelRecive(data: any) {
   const show: string = isReciveOpen ? "flex" : "hidden";
   // console.log(data.data)
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState(data.data);
+  const [data, setData] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  console.log(searchResults)
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('/api/currencies')
+      const response = await res.json()
+      setData(response.data.data)
+      setSearchResults(response.data.data)
+    }
+    fetchData()
+  }, [])
+  console.log('intila state of search recive model')
 
   function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const term = event.target.value;
     setSearchTerm(term);
     
     // Call your search function here and set the search results
-    const results: any = data.data.filter((result: any) => result.name.toLowerCase().includes(term.toLowerCase()) || result.currency.toLowerCase().includes(term.toLowerCase()));
+    const results: any = data.filter((result: any) => result.name.toLowerCase().includes(term.toLowerCase()) || result.currency.toLowerCase().includes(term.toLowerCase()));
     setSearchResults(results);
   }
 

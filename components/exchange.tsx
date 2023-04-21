@@ -5,9 +5,9 @@ import Receive from './receive'
 import ReceiveInput from './recieveinput'
 import AddressInput from "./addressinput";
 import ShiftButton from "./shiftbutton";
-import {useContext} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import { AppContext } from '../contexts/AppContext';
-
+// import {getOneRecive} from './apicall'
 export default function Exchange() { 
   const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork } = useContext(AppContext);
 
@@ -18,12 +18,36 @@ export default function Exchange() {
     setSendNetwork(reciveNetwork);
   
     console.log(recive,reciveNetwork,send,sendNetwork);}
+
+    const oneSend:string = "1";
+    const [oneRecive, setOneRecive] = useState('')
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     try {
+    //       const response = await axios.get("https://api.easybit.com/currencyList", {
+    //         headers: { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma" },
+    //       });
+    //       const data = response.data.data;
+    //       if (response.data.success === 1){
+    //         console.log(data[170])        
+    //       }
+    //     } catch (error) {
+    //       console.log(error);
+    //       alert(error);
+    //       };
+    //     }
+    //     setOneRecive('responseData');
+    //     console.log("you are in useEffect hook")
+    //     fetchData();
+    //   }
+
+    // , []);
   return (
     
     <>
       <div className="grid grid-cols-3 max-w-xl w-full text-black dark:text-white py-12 border-[3px] border-gray-200 dark:border-gray-600 rounded-lg px-3 lg:px-0">
         <h6 className="col-span-3 w-full flex justify-center items-center gap-2 text-black dark:text-neutral-300">
-        1 {send} = 0.06558863 {recive} 
+        {oneSend} {send} = {oneRecive} {recive} 
         </h6>
         <div className="flex col-span-3 lg:px-12 px-1 mt-5 gap-3 items-center justify-center">
           <Send />

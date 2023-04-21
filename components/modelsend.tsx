@@ -6,8 +6,13 @@ import axios from "axios";
 import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { useEffect, useState } from "react";
+import { useCurrencies } from "@/lib/hooks";
 // import { getAllCryptocurrencies } from "./apicall";
-export default function ModelSend(data: any) {
+export default function ModelSend() {
+  // const data = useCurrencies()
+  
+  
+  console.log("from model send");
   const { isSendOpen, setIsSendOpen, setSend, send, sendNetwork, setSendNetwork } = useContext(AppContext);
   const handleClick = () => {
     setIsSendOpen(!isSendOpen);
@@ -22,15 +27,28 @@ export default function ModelSend(data: any) {
   console.log(isSendOpen, "from model");
   const show: string = isSendOpen ? "flex" : "hidden";
   // console.log(data.data)
+  const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState(data.data);
-
+  const [searchResults, setSearchResults] = useState([]);
+  console.log(searchResults);
+  
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('/api/currencies')
+      const response = await res.json()
+      console.log(response.data)
+      console.log("From hook")
+      setData(response.data.data)
+      setSearchResults(response.data.data)
+    }
+    fetchData()
+  }, [])
   function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const term = event.target.value;
     setSearchTerm(term);
 
     // Call your search function here and set the search results
-    const results: any = data.data.filter(
+    const results: any = data.filter(
       (result: any) =>
         result.name.toLowerCase().includes(term.toLowerCase()) ||
         result.currency.toLowerCase().includes(term.toLowerCase())

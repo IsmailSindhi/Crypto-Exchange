@@ -12,9 +12,13 @@ import axios from "axios";
 import { getAllCryptocurrencies } from "../components/apicall";
 import ModelSend from "@/components/modelsend";
 import ModelRecive from "@/components/modelrecive";
+import {useCurrencies} from "@/lib/hooks"
 
-export default function Home({ data }: any) {
-  console.log(data);
+export default function Home() {
+  const currencies :any = useCurrencies()
+  console.log(currencies)
+  console.log("from index.tsx")
+
   return (
     <>
       <Head>
@@ -27,8 +31,8 @@ export default function Home({ data }: any) {
       <Topbar />
       <div className="w-full justify-center flex flex-col items-center">
         <Hero />
-        <ModelSend data={data}/>
-        <ModelRecive data={data}/>
+        <ModelSend />
+        <ModelRecive/>
         <Exchange />
         {/* <Chart /> */}
       </div>
@@ -37,27 +41,4 @@ export default function Home({ data }: any) {
     </>
   );
 }
-export const getServerSideProps = async () => {
-  try {
-    const response = await axios.get("https://api.easybit.com/currencyList", {
-      headers: { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma" },
-    });
-    const data = response.data.data;
-    if (response.data.success === 1){
-      // console.log(data[170])
-    
-    return {
-      props: {
-        data,
-      },
-    };
-  }} catch (error) {
-    console.log(error);
-    return {
-      props: {},
-    };
-  }
-  //  let data = getAllCryptocurrencies()
-  //  data = JSON.parse(JSON.stringify(data))
-  //  console.log(data)
-};
+
