@@ -9,39 +9,62 @@ import {useContext, useEffect, useState} from 'react'
 import { AppContext } from '../contexts/AppContext';
 // import {getOneRecive} from './apicall'
 export default function Exchange() { 
-  const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork } = useContext(AppContext);
-
+  const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork,sendAmount,setReciveAmount,setSendAmount } = useContext(AppContext);
+const [errorMessage,setErrorMessage] = useState("")
   const swap = () =>{
     setRecive(send);
     setSend(recive);
     setReciveNetwork(sendNetwork);
     setSendNetwork(reciveNetwork);
-  
+    setSendAmount('')
+    setReciveAmount('')
     console.log(recive,reciveNetwork,send,sendNetwork);}
 
     const oneSend:string = "1";
     const [oneRecive, setOneRecive] = useState('')
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await axios.get("https://api.easybit.com/currencyList", {
-    //         headers: { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma" },
-    //       });
-    //       const data = response.data.data;
-    //       if (response.data.success === 1){
-    //         console.log(data[170])        
-    //       }
-    //     } catch (error) {
-    //       console.log(error);
-    //       alert(error);
-    //       };
-    //     }
-    //     setOneRecive('responseData');
-    //     console.log("you are in useEffect hook")
-    //     fetchData();
-    //   }
+    useEffect(() => {
+      if (sendAmount === '' || sendAmount === '0'){setReciveAmount("")}else{
 
-    // , []);
+        const fetchData = async () => {
+          try {
+          const res = await fetch('/api/rate', {
+            method: 'POST',
+            body: JSON.stringify({ send, recive,sendAmount,sendNetwork,reciveNetwork }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          console.log(res)
+          const response = await res.json();
+          console.log(response)
+        if (response.data) {
+
+          // const data = response.data.data;
+          if (response.data.success === 1){
+            // console.log()   
+            setErrorMessage("")
+            setReciveAmount(response.data.data.receiveAmount)
+            setOneRecive(response.data.data.rate)
+          }else {
+            setSendAmount('');
+            setReciveAmount('');
+            setErrorMessage(response.data.errorMessage)
+            console.log(response.data.errorMessage)
+          }
+        }
+      } catch (error) {
+          setReciveAmount('');
+          console.log(error);
+          // alert(error);
+          };
+        }
+        // setOneRecive('responseData');
+        // console.log("you are in useEffect hook")
+        fetchData();
+      }
+    }
+
+    , [send, recive,sendNetwork,reciveNetwork,sendAmount,setReciveAmount,setSendAmount,setErrorMessage,errorMessage]);
   return (
     
     <>
@@ -70,6 +93,7 @@ export default function Exchange() {
           <ReceiveInput />
           
         </div>
+          {errorMessage && <div className="flex w-full items-center justify-center col-span-3 mt-2"><span className="text-rose-500 text-sm text-center">{errorMessage}</span></div>}
         <div className="w-full flex flex-col items-center justify-center mt-8 col-span-3 px-12 lg:px-1">
           <p className="mb-2 text-lg font-verctex">Receiving Address</p>
           <AddressInput />

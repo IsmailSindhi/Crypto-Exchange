@@ -2,17 +2,34 @@ import { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if (req.method !== "GET") {
-        return res.status(405).send({ message: 'Only Get requests are allowed'})
+    if (req.method !== "POST") {
+        return res.status(405).send({ message: 'Only Post requests are allowed'})
     }
     
     try{
-        const response = await axios.get("https://api.easybit.com/rate", {headers : { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma"}})
-        // console.log(response)
-        // console.log("api")
-        return res.status(200).json({data: response.data})
-    }catch(err){
-        console.log(err);
-        return res.status(500);
+        const { send, recive,sendAmount,sendNetwork,reciveNetwork } = req.body;
+        console.log(req.body)
+        const response = await axios.get("https://api.easybit.com/rate", {params: {
+            send: send,
+            receive: recive,
+            amount: sendAmount,
+            // sendNetwork: sendNetwork,
+            // receiveNetwork: reciveNetwork,
+          },headers : { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma"}});
+          console.log(response.status);
+          console.log("api");
+          if (response.status === 200) {
+
+              if(response.data.success === 1){
+                  return res.status(200).json({data: response.data});
+                  
+                }else{
+                    console.log(response.data.success)
+                }
+            }
+            // res.end();
+        }catch(err: any){
+        return res.status(500).json({data: err.response.data});    
+        console.log(err.response.data.errorMessage);
     }
 }

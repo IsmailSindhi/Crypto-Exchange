@@ -12,12 +12,12 @@ import axios from "axios";
 import { getAllCryptocurrencies } from "../components/apicall";
 import ModelSend from "@/components/modelsend";
 import ModelRecive from "@/components/modelrecive";
-import {useCurrencies} from "@/lib/hooks"
+// import {useCurrencies} from "@/lib/hooks"
 
 export default function Home() {
-  const currencies :any = useCurrencies()
-  console.log(currencies)
-  console.log("from index.tsx")
+  // const currencies :any = useCurrencies()
+  // console.log(currencies)
+  // console.log("from index.tsx")
 
   return (
     <>

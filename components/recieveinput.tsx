@@ -2,7 +2,7 @@ import {useContext} from 'react'
 import { AppContext } from '../contexts/AppContext';
 
 export default function ReceiveInput() {
-  const { recive } = useContext(AppContext);
+  const { recive,reciveAmount,setReciveAmount } = useContext(AppContext);
 
     return (
       <>
@@ -10,6 +10,8 @@ export default function ReceiveInput() {
             <input
               className="c-input"
               placeholder="You recive"
+              value={reciveAmount}
+              onChange={(e) => setReciveAmount(reciveAmount)}
             />
             <div className="absolute right-2">
               <span className="text-sm font-GT_Pressura_Mono_Regular eq-sign cursor-default">{recive}</span>

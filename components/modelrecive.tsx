@@ -13,18 +13,18 @@ export default function ModelRecive() {
     setIsReciveOpen(!isReciveOpen);
   };
   const handleCurrenciesClick = (currency: string, network: string) => {
-    console.log(currency);
+    // console.log(currency);
     setReciveNetwork(network);
     setRecive(currency);
     setIsReciveOpen(!setIsReciveOpen);
   };
-  console.log(isReciveOpen,'from recive model');
+  // console.log(isReciveOpen,'from recive model');
   const show: string = isReciveOpen ? "flex" : "hidden";
   // console.log(data.data)
   const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults)
+  // console.log(searchResults)
   useEffect(() => {
     async function fetchData() {
       const res = await fetch('/api/currencies')
@@ -34,7 +34,7 @@ export default function ModelRecive() {
     }
     fetchData()
   }, [])
-  console.log('intila state of search recive model')
+  // console.log('intila state of search recive model')
 
   function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     const term = event.target.value;
@@ -72,13 +72,13 @@ export default function ModelRecive() {
           {searchResults.map((item: any, index: any) => (
             <li className="list-none" key={index}>
               <div className="flex flex-col gap-4 items-center justify-between ">
-                {item.networkList.map((network: any, networkIndex: any) => (
+                {/* {item.networkList.map((network: any, networkIndex: any) => ( */}
                 
                 <button
                   className="w-full flex justify-between dark:hover:bg-[#171D23] px-7 py-2 rounded-lg"
-                  key={networkIndex}
+                  // key={networkIndex}
                   onClick={() => {
-                    handleCurrenciesClick(item.currency, network.name);
+                    handleCurrenciesClick(item.currency, item.networkList[0].name);
                   }}
                 >
               
@@ -96,17 +96,17 @@ export default function ModelRecive() {
                           <h1 className="text-base ">
                             {item.currency}
                             <span className="text-blue-400">
-                              . {network.name}
+                              . {item.networkList[0].name}
                             </span>
                           </h1>
                         </div>
                       </div>
-                        {recive === item.currency && reciveNetwork === network.name &&  (
+                        {recive === item.currency &&   (
                           <MdOutlineDone className="w-8 h-8 fill-blue-400" />
                         )}
                 
                 </button>
-                  ))}
+                  {/* ))} */}
               </div>
             </li>
           ))}

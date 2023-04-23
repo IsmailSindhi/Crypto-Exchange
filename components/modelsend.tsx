@@ -12,32 +12,32 @@ export default function ModelSend() {
   // const data = useCurrencies()
   
   
-  console.log("from model send");
+  // console.log("from model send");
   const { isSendOpen, setIsSendOpen, setSend, send, sendNetwork, setSendNetwork } = useContext(AppContext);
   const handleClick = () => {
     setIsSendOpen(!isSendOpen);
   };
   const handleCurrenciesClick = (currency: string, network: string) => {
-    console.log(currency);
+    // console.log(currency);
     setSend(currency);
     setSendNetwork(network);
     setIsSendOpen(!isSendOpen);
 
   };
-  console.log(isSendOpen, "from model");
+  // console.log(isSendOpen, "from model");
   const show: string = isSendOpen ? "flex" : "hidden";
   // console.log(data.data)
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults);
+  // console.log(searchResults);
   
   useEffect(() => {
     async function fetchData() {
       const res = await fetch('/api/currencies')
       const response = await res.json()
-      console.log(response.data)
-      console.log("From hook")
+      // console.log(response.data)
+      // console.log("From hook")
       setData(response.data.data)
       setSearchResults(response.data.data)
     }
@@ -79,13 +79,13 @@ export default function ModelSend() {
           {searchResults.map((item: any, index: any) => (
             <li className="list-none" key={index}>
               <div className="flex flex-col gap-4 items-center justify-between ">
-                {item.networkList.map((network: any, networkIndex: any) => (
+                {/* {item.networkList.map((network: any, networkIndex: any) => ( */}
                 
                 <button
                   className="w-full flex justify-between dark:hover:bg-[#171D23] px-7 py-2 rounded-lg"
-                  key={networkIndex}
+                  // key={networkIndex}
                   onClick={() => {
-                    handleCurrenciesClick(item.currency, network.name);
+                    handleCurrenciesClick(item.currency, item.networkList[0].name);
                   }}
                 >
               
@@ -103,17 +103,17 @@ export default function ModelSend() {
                           <h1 className="text-base ">
                             {item.currency}
                             <span className="text-blue-400">
-                              . {network.name}
+                              . {item.networkList[0].name}
                             </span>
                           </h1>
                         </div>
                       </div>
-                        {send === item.currency && sendNetwork === network.name &&  (
+                        {send === item.currency &&  (
                           <MdOutlineDone className="w-8 h-8 fill-blue-400" />
                         )}
                 
                 </button>
-                  ))}
+                  {/* // ))} */}
               </div>
             </li>
           ))}

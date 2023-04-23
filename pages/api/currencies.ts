@@ -8,8 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     
     try{
         const response = await axios.get("https://api.easybit.com/currencyList", {headers : { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma"}})
-        // console.log(response)
-        // console.log("api")
+
         return res.status(200).json({data: response.data})
     }catch(err){
         console.log(err);
