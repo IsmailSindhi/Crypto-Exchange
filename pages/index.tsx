@@ -1,17 +1,18 @@
 import Head from "next/head";
 import Script from "next/script";
-import Topbar from "@/components/topbar";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import Hero from "@/components/hero";
-import Exchange from "@/components/exchange";
-import Footer from "@/components/footer";
-import { GetServerSideProps } from "next";
 import axios from "axios";
 import { getAllCryptocurrencies } from "../components/apicall";
+// component imports
+import Hero from "@/components/hero";
+import Topbar from "@/components/topbar";
+import Exchange from "@/components/exchange";
+import Footer from "@/components/footer";
 import ModelSend from "@/components/modelsend";
 import ModelRecive from "@/components/modelrecive";
+import { GetServerSideProps } from "next";
 // import {useCurrencies} from "@/lib/hooks"
 
 export default function Home() {

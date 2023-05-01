@@ -34,12 +34,17 @@ export default function ModelSend() {
   
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('/api/currencies')
-      const response = await res.json()
-      // console.log(response.data)
+      const res = await fetch('/api/currencies');
+      const response = await res.json();
+      if(response.data.success === 1){
+        setData(response.data.data);
+        console.log(response.data.data);
+        setSearchResults(response.data.data);
+        
+      }else{
+        alert("Error fetching currencies");
+      }
       // console.log("From hook")
-      setData(response.data.data)
-      setSearchResults(response.data.data)
     }
     fetchData()
   }, [])

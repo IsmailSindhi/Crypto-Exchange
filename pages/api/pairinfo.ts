@@ -7,12 +7,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     
     try{
-        const { send, recive,sendAmount,sendNetwork,reciveNetwork } = req.body;
+        const { send, recive,sendNetwork,reciveNetwork } = req.body;
         console.log(req.body)
-        const response = await axios.get("https://api.easybit.com/rate", {params: {
+        const response = await axios.get("https://api.easybit.com/pairInfo", {params: {
             send: send,
             receive: recive,
-            amount: sendAmount,
+            // amount: sendAmount,
             // sendNetwork: sendNetwork,
             // receiveNetwork: reciveNetwork,
           },headers : { "API-KEY": "test_G5Qe3HIcf0vxqesnfDeT7e2Ma"}});

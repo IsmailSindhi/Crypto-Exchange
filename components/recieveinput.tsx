@@ -1,14 +1,25 @@
-import {useContext} from 'react'
+import {useContext,useEffect, useState} from 'react'
 import { AppContext } from '../contexts/AppContext';
 
-export default function ReceiveInput() {
+export default function ReceiveInput(props: any) {
   const { recive,reciveAmount,setReciveAmount } = useContext(AppContext);
-
+  const [divStyle, setDivStyle] = useState('c-div')
+  const [iStyle, setIStyle] = useState('c-input')
+  const { e } = props;
+  useEffect(() => {
+    if(e){
+      setDivStyle('e-div')
+      setIStyle('e-input')
+    }else{
+      setDivStyle('c-div')
+      setIStyle('c-input')
+    }
+  },[e])
     return (
       <>
-     <div className="relative flex items-center w-[187px] border-2 border-neutral-200 dark:border-neutral-500  rounded-lg">
+     <div className={`${divStyle}`}>
             <input
-              className="c-input"
+              className={`${iStyle}`}
               placeholder="You recive"
               value={reciveAmount}
               onChange={(e) => setReciveAmount(reciveAmount)}

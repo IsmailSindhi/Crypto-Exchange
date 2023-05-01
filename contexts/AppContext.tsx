@@ -23,6 +23,10 @@ type AppContextType = {
   setSendNetwork: (send: string) => void;
   reciveNetwork: string;
   setReciveNetwork: (send: string) => void;
+  minimumAmount: string;
+  setMinimumAmount: (send: string) => void;
+  maximumAmount: string;
+  setMaximumAmount: (send: string) => void;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -42,6 +46,10 @@ export const AppContext = createContext<AppContextType>({
   setIsSendOpen: () => {},
   isReciveOpen: false,
   setIsReciveOpen: () => {},
+  minimumAmount: '',
+  setMinimumAmount: () => {},
+  maximumAmount: '',
+  setMaximumAmount: () => {},
 });
 
 export const AppContextProvider: React.FC<Props> = ({ children }) => {
@@ -49,8 +57,10 @@ export const AppContextProvider: React.FC<Props> = ({ children }) => {
   const [sendNetwork, setSendNetwork] = useState('ETH');
   const [recive, setRecive] = useState('BTC');
   const [send, setSend] = useState('ETH');
-  const [reciveAmount, setReciveAmount] = useState('1');
-  const [sendAmount, setSendAmount] = useState('1');
+  const [reciveAmount, setReciveAmount] = useState('');
+  const [sendAmount, setSendAmount] = useState('');
+  const [minimumAmount, setMinimumAmount] = useState('');
+  const [maximumAmount, setMaximumAmount] = useState('');
   const [isSendOpen, setIsSendOpen] = useState(false);
   const [isReciveOpen, setIsReciveOpen] = useState(false);
 
@@ -70,7 +80,11 @@ export const AppContextProvider: React.FC<Props> = ({ children }) => {
     sendAmount,
     setSendAmount,
     reciveAmount,
-    setReciveAmount
+    setReciveAmount,
+    minimumAmount,
+    setMinimumAmount,
+    maximumAmount,
+    setMaximumAmount
   };
 
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;

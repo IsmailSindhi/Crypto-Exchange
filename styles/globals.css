@@ -71,8 +71,14 @@
     .c-input{
       @apply w-full text-sm font-GT_Pressura_Mono_Regular bg-transparent text-center py-3 px-3  rounded-md focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent ;
     }
+    .e-input{
+      @apply w-full text-sm font-GT_Pressura_Mono_Regular bg-transparent text-center py-3 px-3  rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500 dark:focus:ring-rose-500 focus:border-transparent ;
+    }
     .c-div {
       @apply relative flex items-center w-[187px] border-2 border-neutral-200 dark:border-neutral-500  rounded-lg;
+    }
+    .e-div {
+      @apply relative flex items-center w-[187px] border-2 border-rose-500 dark:border-rose-500  rounded-lg;
     }
     .small-btn {
       @apply border-2 border-b-4 border-neutral-400 py-1 px-2 rounded-xl hover:border-black dark:hover:border-white;

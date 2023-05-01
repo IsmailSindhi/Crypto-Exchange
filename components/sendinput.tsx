@@ -1,14 +1,25 @@
 import {useContext, useEffect, useState} from 'react'
 import { AppContext } from '../contexts/AppContext';
 
-export default function SendInput() {
+export default function SendInput(props: any) {
   const { sendAmount,setSendAmount } = useContext(AppContext);
-  
+  const { e } = props;
+  const [divStyle, setDivStyle] = useState('c-div')
+  const [iStyle, setIStyle] = useState('c-input')
+  useEffect(() => {
+    if(e){
+      setDivStyle('e-div')
+      setIStyle('e-input')
+    }else{
+      setDivStyle('c-div')
+      setIStyle('c-input')
+    }
+  },[e])
     return (
       <>
-     <div className="c-div">
+     <div className={`${divStyle}`}>
             <input
-              className="c-input"
+              className={`${iStyle}`}
               placeholder="You send"
               value={sendAmount}
               onChange={(e) => setSendAmount(e.target.value)}

@@ -9,7 +9,7 @@ import {useContext, useEffect, useState} from 'react'
 import { AppContext } from '../contexts/AppContext';
 // import {getOneRecive} from './apicall'
 export default function Exchange() { 
-  const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork,sendAmount,setReciveAmount,setSendAmount } = useContext(AppContext);
+  const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork,sendAmount,setReciveAmount,setSendAmount,minimumAmount,setMinimumAmount,maximumAmount,setMaximumAmount  } = useContext(AppContext);
 const [errorMessage,setErrorMessage] = useState("")
   const swap = () =>{
     setRecive(send);
@@ -22,11 +22,44 @@ const [errorMessage,setErrorMessage] = useState("")
 
     const oneSend:string = "1";
     const [oneRecive, setOneRecive] = useState('')
+
+
+    useEffect(()=>{},[])
     useEffect(() => {
       if (sendAmount === '' || sendAmount === '0'){setReciveAmount("")}else{
 
         const fetchData = async () => {
           try {
+          const pairres = await fetch('/api/pairinfo',{
+            method: 'POST',
+            body: JSON.stringify({ send, recive,sendNetwork,reciveNetwork }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const pairresponse = await pairres.json();
+          if (pairresponse.data){
+            if (pairresponse.data.success === 1){
+              setMinimumAmount(pairresponse.data.data.minimumAmount);
+              setMaximumAmount(pairresponse.data.data.maximumAmount);
+              setErrorMessage('');
+              // console.log(pairresponse.data.success);
+              // console.log(pairresponse.data);
+              // console.log(maximumAmount);
+              // console.log(maximumAmount);
+            }else{
+              setReciveAmount('');
+              setErrorMessage(pairresponse.data.errorMessage);
+              console.log(pairresponse.data.success);
+            }
+          }    
+        }catch (error) {
+            setReciveAmount('');
+            console.log(error);
+            // alert(error);
+          };
+        
+        try {
           const res = await fetch('/api/rate', {
             method: 'POST',
             body: JSON.stringify({ send, recive,sendAmount,sendNetwork,reciveNetwork }),
@@ -34,9 +67,9 @@ const [errorMessage,setErrorMessage] = useState("")
               'Content-Type': 'application/json',
             },
           });
-          console.log(res)
+          // console.log(pairres)
           const response = await res.json();
-          console.log(response)
+          // console.log(response)
         if (response.data) {
 
           // const data = response.data.data;
@@ -46,7 +79,7 @@ const [errorMessage,setErrorMessage] = useState("")
             setReciveAmount(response.data.data.receiveAmount)
             setOneRecive(response.data.data.rate)
           }else {
-            setSendAmount('');
+            // setSendAmount('');
             setReciveAmount('');
             setErrorMessage(response.data.errorMessage)
             console.log(response.data.errorMessage)
@@ -57,14 +90,14 @@ const [errorMessage,setErrorMessage] = useState("")
           console.log(error);
           // alert(error);
           };
-        }
+        // }
         // setOneRecive('responseData');
         // console.log("you are in useEffect hook")
-        fetchData();
       }
-    }
+      fetchData();
+    }}
 
-    , [send, recive,sendNetwork,reciveNetwork,sendAmount,setReciveAmount,setSendAmount,setErrorMessage,errorMessage]);
+    , [send, recive,sendNetwork,reciveNetwork,sendAmount,errorMessage,minimumAmount,setMinimumAmount,maximumAmount,setMaximumAmount,setReciveAmount]);
   return (
     
     <>
@@ -88,9 +121,9 @@ const [errorMessage,setErrorMessage] = useState("")
           
         </div>
         <div className="flex items-center justify-center col-span-3 gap-4 lg:mx-10 mx-1 mt-3">
-          <SendInput />
+          <SendInput e={errorMessage}/>
           <div className="text-2xl eq-sign cursor-default"><span>=</span></div>
-          <ReceiveInput />
+          <ReceiveInput e={errorMessage}/>
           
         </div>
           {errorMessage && <div className="flex w-full items-center justify-center col-span-3 mt-2"><span className="text-rose-500 text-sm text-center">{errorMessage}</span></div>}
