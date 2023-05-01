@@ -11,6 +11,7 @@ import { AppContext } from '../contexts/AppContext';
 export default function Exchange() { 
   const { send,setSend,recive,setRecive,reciveNetwork,setReciveNetwork,sendNetwork,setSendNetwork,sendAmount,setReciveAmount,setSendAmount,minimumAmount,setMinimumAmount,maximumAmount,setMaximumAmount  } = useContext(AppContext);
 const [errorMessage,setErrorMessage] = useState("")
+const [errorMessageP,setErrorMessageP] = useState("")
   const swap = () =>{
     setRecive(send);
     setSend(recive);
@@ -42,19 +43,19 @@ const [errorMessage,setErrorMessage] = useState("")
             if (pairresponse.data.success === 1){
               setMinimumAmount(pairresponse.data.data.minimumAmount);
               setMaximumAmount(pairresponse.data.data.maximumAmount);
-              setErrorMessage('');
+              setErrorMessageP('');
               // console.log(pairresponse.data.success);
               // console.log(pairresponse.data);
               // console.log(maximumAmount);
               // console.log(maximumAmount);
             }else{
-              setReciveAmount('');
-              setErrorMessage(pairresponse.data.errorMessage);
+              // setReciveAmount('');
+              setErrorMessageP(pairresponse.data.errorMessage);
               console.log(pairresponse.data.success);
             }
           }    
         }catch (error) {
-            setReciveAmount('');
+            // setReciveAmount('');
             console.log(error);
             // alert(error);
           };
@@ -77,16 +78,16 @@ const [errorMessage,setErrorMessage] = useState("")
             // console.log()   
             setErrorMessage("")
             setReciveAmount(response.data.data.receiveAmount)
-            setOneRecive(response.data.data.rate)
+            // setOneRecive(response.data.data.rate)
           }else {
             // setSendAmount('');
-            setReciveAmount('');
+            // setReciveAmount('');
             setErrorMessage(response.data.errorMessage)
-            console.log(response.data.errorMessage)
+            // console.log(response.data.errorMessage)
           }
         }
       } catch (error) {
-          setReciveAmount('');
+          // setReciveAmount('');
           console.log(error);
           // alert(error);
           };
@@ -127,6 +128,7 @@ const [errorMessage,setErrorMessage] = useState("")
           
         </div>
           {errorMessage && <div className="flex w-full items-center justify-center col-span-3 mt-2"><span className="text-rose-500 text-sm text-center">{errorMessage}</span></div>}
+          {errorMessageP && <div className="flex w-full items-center justify-center col-span-3 mt-2"><span className="text-rose-500 text-sm text-center">{errorMessageP}</span></div>}
         <div className="w-full flex flex-col items-center justify-center mt-8 col-span-3 px-12 lg:px-1">
           <p className="mb-2 text-lg font-verctex">Receiving Address</p>
           <AddressInput />

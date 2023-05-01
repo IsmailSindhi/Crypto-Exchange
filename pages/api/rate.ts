@@ -27,9 +27,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 console.log(response.data.success)
             }
          }
-            // res.end();
         }catch(err: any){
-        console.log(err.response.data.errorMessage);
-        return res.status(500).json({data: err.response.data});    
+            console.log(err.response.data.errorMessage);
+            // res.end();
+            return res.status(500).json({data: err.response.data});    
     }
 }
